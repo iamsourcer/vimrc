@@ -1,0 +1,107 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" Syntax checking and semantic errors
+Plugin 'dense-analysis/ale'
+
+" Needs pip install flake8 to run
+" static syntax and style checker for Python source code
+Plugin 'nvie/vim-flake8'
+
+" status bar
+Plugin 'itchyny/lightline.vim'
+" You complete me plugin
+"Plugin 'ycm-core/YouCompleteMe'
+		
+Plugin 'mattn/emmet-vim'
+
+" Nerdtree to navigate things
+Plugin 'scrooloose/nerdtree'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+set laststatus=2
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+syntax on
+" cursor line highlight always
+set cursorline
+" coloring
+set t_Co=256 
+" color scheme
+colorscheme habamax 
+
+" indentation
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
+
+"tabs
+
+au BufNewFile, BufRead *.py
+   \ set tabstop=4
+   \ set softtabstop=4
+   \ set shiftwidth=4
+   \ set textwidth=79
+   \ set expandtab
+   \ set autoindent
+   \ set fileformat=unix
+
+let g:ale_linters = {'python': ['flake8']}
+
+set number
+
+" # tabs
+set tabstop=4
+" scrolling without opening folds
+set foldopen-=block
+
+" remaping leader key to option for mac
+let mapleader = "," 
+
+"opening nerdtree with leader + n
+nnoremap <leader>n :NERDTreeFocus<CR>
+
+" Remap +y to a single key press
+nnoremap <silent> <leader>y "*y
+nnoremap <silent> <leader>p "*p
+
+
+let g:ycm_python_interpreter_path = '/usr/bin/python3'
+let g:ycm_python_sys_path = []
+let g:ycm_extra_conf_vim_data = [
+  \  'g:ycm_python_interpreter_path',
+  \  'g:ycm_python_sys_path'
+  \]
+let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
+
+
+" Reloading tags
+" autocmd BufWritePost * !ctags -R" This command will run the ctags command when you open a new window
+" autocmd VimEnter * !ctags -R
+
+
